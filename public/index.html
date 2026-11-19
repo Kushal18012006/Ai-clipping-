@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ClipForge — AI viral clip studio</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✂️</text></svg>" />
+  </head>
+  <body>
+    <div class="glow"></div>
+
+    <header class="topbar">
+      <div class="brand">
+        <span class="mark">✂</span>
+        <div>
+          <strong>ClipForge</strong>
+          <span class="tagline">AI viral clip studio</span>
+        </div>
+      </div>
+      <div class="status" id="status"><span class="dot"></span><span id="status-text">checking…</span></div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>One long video in.<br /><em>Ten viral clips out.</em></h1>
+        <p>
+          Paste a YouTube link or drop a file. ClipForge transcribes it, scores every moment for
+          hook strength, then cuts, reframes and captions the winners for Shorts, Reels and TikTok.
+        </p>
+      </section>
+
+      <section class="panel">
+        <div class="tabs" role="tablist">
+          <button class="tab is-active" data-pane="url" role="tab">YouTube link</button>
+          <button class="tab" data-pane="file" role="tab">Upload video</button>
+        </div>
+
+        <div class="pane is-active" data-pane="url">
+          <label class="field">
+            <span>Video URL</span>
+            <input id="url" type="url" placeholder="https://youtube.com/watch?v=…" autocomplete="off" />
+          </label>
+        </div>
+
+        <div class="pane" data-pane="file">
+          <div class="dropzone" id="dropzone" tabindex="0">
+            <input id="file" type="file" accept="video/*,audio/*" hidden />
+            <div class="dz-icon">⬆</div>
+            <p id="dz-label">Drop a video here, or <u>browse</u></p>
+            <small>MP4, MOV, MKV, WEBM · up to 1.5 GB</small>
+          </div>
+        </div>
+
+        <div class="options">
+          <label class="field">
+            <span>Clips</span>
+            <select id="count">
+              <option value="3">3 clips</option>
+              <option value="5" selected>5 clips</option>
+              <option value="8">8 clips</option>
+              <option value="10">10 clips</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Length</span>
+            <select id="length">
+              <option value="15,30">15–30s</option>
+              <option value="20,45" selected>20–45s</option>
+              <option value="30,60">30–60s</option>
+              <option value="45,90">45–90s</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Format</span>
+            <select id="aspect">
+              <option value="vertical" selected>Vertical (crop)</option>
+              <option value="blurpad">Vertical (blur)</option>
+              <option value="original">Original</option>
+            </select>
+          </label>
+          <label class="field checkbox">
+            <input id="captions" type="checkbox" checked />
+            <span>Burned-in captions</span>
+          </label>
+        </div>
+
+        <button class="primary" id="generate">Generate clips</button>
+        <p class="hint" id="hint"></p>
+      </section>
+
+      <section class="panel progress" id="progress" hidden>
+        <div class="progress-head">
+          <span id="stage">Working…</span>
+          <span id="percent">0%</span>
+        </div>
+        <div class="bar"><div class="bar-fill" id="bar-fill"></div></div>
+        <ol class="stages" id="stages">
+          <li data-stage="download">Fetch video</li>
+          <li data-stage="transcribe">Transcribe</li>
+          <li data-stage="analyze">Find viral moments</li>
+          <li data-stage="render">Cut &amp; caption</li>
+        </ol>
+        <div class="log" id="log"></div>
+        <div class="error" id="error" hidden></div>
+      </section>
+
+      <section class="results" id="results"></section>
+    </main>
+
+    <footer>Runs locally on your machine. Clips are written to the <code>jobs/</code> folder.</footer>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
